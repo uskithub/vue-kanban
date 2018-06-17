@@ -1,0 +1,84 @@
+
+.kanban-board-container {
+    display: flex;
+    align-items: flex-start;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    .kanban-board {
+        flex: 1;
+        align-items: flex-start;
+        margin: 0 0.5em;
+        position: relative;
+        background: rgba(black, 0.2);
+        overflow: hidden;
+
+        .kanban-board-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .kanban-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0.5em 0;
+            min-height: 100px;
+            color: white;
+            border: 1px solid transparent;
+
+            &.drop-target {
+                border: 1px dashed #000;
+            }
+
+            .kanban-item {
+                margin: 0.5em;
+                padding: 0.5em;
+                background: rgba(black, 0.4);
+                border: 1px solid #000;
+            
+                &.is-moving {
+                    background: rgba(black, 0.8);
+                }
+            
+                &.media {
+                    width: inherit;
+
+                    .kanban-list {
+                        min-height: inherit;
+                    }
+
+                    .media-right {
+                        margin-left: 0.5em;
+                    }
+            
+                    .block {
+                        padding: 0;
+                    }
+            
+                    .title {
+                        font-size: 1rem;
+                    }
+                }
+            
+                dl {
+                    margin: 0;
+                }
+            
+                dt {
+                    text-decoration: underline;
+                }
+            
+                dd {
+                    margin-left: 1em;
+                    
+                }
+
+                .kanban-item {
+                    margin: 0.5em 0 0 0;
+                }
+            }
+        }
+    }
+}

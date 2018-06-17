@@ -1,14 +1,17 @@
 <template lang="pug">
 	li.kanban-item(draggable="true", :key="kanban.id" 
 		@click="$emit('click', $event, kanban)"
-		@dragstart="ondragstart($event, kanban)"
-		@dragend="ondragend($event, kanban)"
+		@dragstart="$emit('dragstart', $event, kanban)"
+		@dragend="$emit('dragend', $event, kanban)"
 	)
 		slot(:name="kanban.name")
 			.media-content
 				strong  {{ kanban.name }}
 				ul.kanban-list(v-if="kanban.kanbans !== undefined && kanban.kanbans.length > 0" data-type="kanban", :data-id="kanban.id")
-					kanban(v-for="child in kanban.kanbans", :kanban="child", :key="child.id")
+					kanban(v-for="child in kanban.kanbans", :kanban="child", :key="child.id"
+						@dragstart="ondragstart"
+						@dragend="ondragend"
+					)
 </template>
 
 <script>
@@ -26,32 +29,20 @@
         , props: {
 			kanban: {
 				type: Object
-				, validator: (value) => { return true; } // TODO
-			}
-			, isDisplayShortname: {
-				type: Boolean
-				, default: false
-			}
-			, isDraggable : {
-				type: Boolean
-				, default: true
+				, validator: (value) => {
+					if (value.name === undefined || value.id === undefined) return false;
+					return true; 
+				}
 			}
 		}
-		, data() {
-			return {
-				dragging : null
-			}
-		}
-		, computed: {
-        }
         , methods: {
             ondragstart(e, kanban) {
-				this.dragging = e.target;
-                console.log("[start]", kanban);
+				this.$emit("dragstart", e, kanban);
+				e.stopPropagation();
 			}
 			, ondragend(e, kanban) {
-				this.dragging = null;
-                console.log("[end]", kanban);
+				this.$emit("dragend", e, kanban);
+				e.stopPropagation();
 			}
         }
 	};

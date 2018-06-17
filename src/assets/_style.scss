@@ -38,41 +38,8 @@
                 background: rgba(black, 0.4);
                 border: 1px solid #000;
             
-                &.is-moving {
-                    background: rgba(black, 0.8);
-                }
-            
-                &.media {
-                    width: inherit;
-
-                    .kanban-list {
-                        min-height: inherit;
-                    }
-
-                    .media-right {
-                        margin-left: 0.5em;
-                    }
-            
-                    .block {
-                        padding: 0;
-                    }
-            
-                    .title {
-                        font-size: 1rem;
-                    }
-                }
-            
-                dl {
-                    margin: 0;
-                }
-            
-                dt {
-                    text-decoration: underline;
-                }
-            
-                dd {
-                    margin-left: 1em;
-                    
+                &.dragging {
+                    opacity: 0.5;
                 }
 
                 .kanban-item {
